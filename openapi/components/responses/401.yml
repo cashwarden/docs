@@ -1,0 +1,6 @@
+Standard401ErrorResponse:
+  description: Unauthorized
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/Error"

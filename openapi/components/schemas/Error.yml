@@ -1,0 +1,15 @@
+Error:
+  type: object
+  properties:
+    code:
+      type: integer
+      description: 错误码
+    message:
+      type: string
+      description: 错误提示消息
+  required:
+    - code
+    - message
+  example:
+    code: 40083
+    message: 参数错误

@@ -1,0 +1,16 @@
+/health_check:
+  get:
+    summary: 健康检查
+    description: 检查服务是否正常，此接口地址不需要带 API 和版本号。
+    responses:
+      "200":
+        description: Successful
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: ok
+      "401":
+        $ref: "#/components/responses/Standard401ErrorResponse"
+      "4XX":
+        $ref: "#/components/responses/Standard4XXErrorResponse"
