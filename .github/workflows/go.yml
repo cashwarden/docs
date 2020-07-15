@@ -36,3 +36,12 @@ jobs:
           cname: api.cashwarden.com
           user_name: "github-actions[bot]"
           user_email: "github-actions[bot]@users.noreply.github.com"
+      
+      - name: Notify slack
+          uses: voxmedia/github-action-slack-notify-build@v1
+          with:
+            channel: app-alerts
+            status: STARTED
+            color: good
+          env:
+            SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
