@@ -14,9 +14,9 @@ import (
 )
 
 const rootPath = "openapi/"
-const ymlFile = "build/openapi.yml"
-const jsonFile = "build/openapi.json"
-const indexFile = "build/index.html"
+const ymlFile = "public/openapi.yml"
+const jsonFile = "public/openapi.json"
+const indexFile = "public/index.html"
 
 func main() {
 	clear()

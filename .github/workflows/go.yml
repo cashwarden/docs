@@ -20,18 +20,13 @@ jobs:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v2
-
       - name: Get dependencies
         run: |
           export PATH=$PATH:$(go env GOPATH)/bin # temporary fix. See https://github.com/actions/setup-go/issues/14
           go get gopkg.in/yaml.v2
 
       - run: |
-          ls -R
           go run main.go
-          ls -R
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
