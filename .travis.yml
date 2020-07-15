@@ -2,12 +2,11 @@ language: go
 go:
   - 1.14.3
 
-go_import_path: gopkg.in/yaml.v2
-
 git:
   depth: false
 
 script:
+  - go get gopkg.in/yaml.v2
   - mkdir public
   - go run main.go
 
