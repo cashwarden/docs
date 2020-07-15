@@ -1,1 +1,3 @@
-# Cashwarden application and API documentation.
+# Cashwarden API Docs
+
+Cashwarden application and API documentation.
