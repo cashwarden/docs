@@ -25,7 +25,10 @@ jobs:
           export PATH=$PATH:$(go env GOPATH)/bin # temporary fix. See https://github.com/actions/setup-go/issues/14
           go get gopkg.in/yaml.v2
 
-      - run: go run main.go
+      - run: |
+          la
+          tree
+          go run main.go
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
