@@ -23,6 +23,9 @@ jobs:
       - name: Get dependencies
         run: |
           go get -v -t -d ./...
+
+      - run: go run main.go
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
