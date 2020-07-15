@@ -1,12 +1,12 @@
 language: go
 go:
   - 1.14.3
+go_import_path: gopkg.in/yaml.v3
 
 git:
   depth: false
 
 script:
-  - go get gopkg.in/yaml.v3
   - go run main.go
 
 deploy:
