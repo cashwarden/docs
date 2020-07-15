@@ -13,7 +13,7 @@ deploy:
   skip-cleanup: true # 重要，不能省略
   local-dir: build # 静态站点文件所在目录
   target-branch: gh-pages # 要将静态站点文件发布到哪个分支
-  github-token: $GITHUB_TOKEN # 重要，$GITHUB_TOKEN 是变量，需要在 GitHub 上申请、再到配置到 Travis
+  github-token: $GITHUB_TOKEN # 重要，$GITHUB_TOKEN 是变量，需要在 GitHub 上申请、再到配置到 Travis https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
   email: caizhenghai@gmail.com
   name: forecho
   fqdn: api.cashwarden.com # 如果是自定义域名，此处要填
