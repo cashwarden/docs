@@ -5,6 +5,9 @@ go:
 git:
   depth: false
 
+before_script:
+  - go get gopkg.in/yaml.v3
+
 script:
   - go run main.go
 
