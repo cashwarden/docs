@@ -22,7 +22,8 @@ jobs:
 
       - name: Get dependencies
         run: |
-          go get -v -t -d ./...
+          export PATH=$PATH:$(go env GOPATH)/bin # temporary fix. See https://github.com/actions/setup-go/issues/14
+          go get gopkg.in/yaml.v2
 
       - run: go run main.go
 
