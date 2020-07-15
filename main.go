@@ -63,10 +63,8 @@ func walkMatch(root, pattern string) error {
 }
 
 func createFile(path string) {
-	// detect if file exists
 	var _, err = os.Stat(path)
 
-	// create file if not exists
 	if os.IsNotExist(err) {
 		var file, err = os.Create(path)
 		if err != nil {
