@@ -26,8 +26,8 @@ jobs:
           go get gopkg.in/yaml.v2
 
       - run: |
+          mkdir public
           go run main.go
-          rm public/.gitignore
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
