@@ -1,0 +1,16 @@
+openapi: "3.0.1"
+info:
+  title: Cashwarden application and API documentation.
+  contact:
+    name: Cashwarden API Support
+    url: 'https://www.cashwarden.com'
+    email: caizhenghai@gmail.com
+  license:
+    name: Cashwarden
+    url: 'https://github.com/cashwarden/server/blob/master/LICENSE'
+  description:
+    $ref: description.md
+  version: 1.0.0
+servers:
+  - url: https://api.cashwarden.com
+    description: Live Server
