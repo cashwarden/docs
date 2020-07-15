@@ -3,13 +3,12 @@ info:
   title: Cashwarden application and API documentation.
   contact:
     name: Cashwarden API Support
-    url: 'https://www.cashwarden.com'
+    url: "https://www.cashwarden.com"
     email: caizhenghai@gmail.com
   license:
     name: Cashwarden
-    url: 'https://github.com/cashwarden/server/blob/master/LICENSE'
-  description:
-    $ref: description.md
+    url: "https://github.com/cashwarden/server/blob/master/LICENSE"
+  description: The Cashwarden APIs.
   version: 1.0.0
 servers:
   - url: https://api.cashwarden.com
