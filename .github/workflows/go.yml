@@ -26,6 +26,7 @@ jobs:
           go get gopkg.in/yaml.v2
 
       - run: |
+          apt install tree
           ls
           tree
           go run main.go

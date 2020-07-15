@@ -6,7 +6,7 @@ git:
   depth: false
 
 before_script:
-  - go get gopkg.in/yaml.v3
+  - go get gopkg.in/yaml.v2
 
 script:
   - go run main.go
