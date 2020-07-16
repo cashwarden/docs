@@ -1,8 +1,14 @@
-type: object
-properties:
-  username:
-    description: Username
-    type: string
-  password:
-    description: Password
-    type: string
+Login:
+  type: object
+  properties:
+    username:
+      description: Username
+      type: string
+      example: "cashwarden"
+    password:
+      description: Password
+      type: string
+      example: "cashwarden123"
+  required:
+    - username
+    - password

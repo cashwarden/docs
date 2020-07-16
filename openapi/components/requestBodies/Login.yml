@@ -1,6 +1,7 @@
-content:
-  application/json:
-    schema:
-      $ref: ../schemas/Login.yml
-description: Login
-required: true
+Login:
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/Login"
+  description: Login
+  required: true
