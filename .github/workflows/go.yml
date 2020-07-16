@@ -22,7 +22,7 @@ jobs:
 
       - run: |
           mkdir public
-          docs-cli-linux-amd64
+          ./docs-cli-linux-amd64
           # go run main.go
 
       - name: Deploy
