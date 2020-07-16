@@ -16,12 +16,13 @@ servers:
 
 components:
   requestBodies:
-    content:
-      application/json:
-        schema:
-          $ref: ../schemas/Login.yml
-    description: Login
-    required: true
+    Login:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Login"
+      description: Login
+      required: true
 
   responses:
     Standard401ErrorResponse:
@@ -55,14 +56,20 @@ components:
         code: 40083
         message: 参数错误
 
-    type: object
-    properties:
-      username:
-        description: Username
-        type: string
-      password:
-        description: Password
-        type: string
+    Login:
+      type: object
+      properties:
+        username:
+          description: Username
+          type: string
+          example: "cashwarden"
+        password:
+          description: Password
+          type: string
+          example: "cashwarden123"
+      required:
+        - username
+        - password
 
   securitySchemes:
     bearerAuth:
@@ -92,22 +99,27 @@ paths:
     post:
       security:
       - bearerAuth: []
-    tags:
-      - Base
-    summary: User Login
-    description: User Login API
-    requestBody:
-      $ref: ../components/requestBodies/Login.yml
-    responses:
-      '200':
-        description: A list of Customers was retrieved successfully
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: ../components/schemas/Customer.yaml
-      '401':
-        $ref: ../components/responses/AccessForbidden.yaml
+      tags:
+        - Base
+      summary: User login
+      description: User login API
+      requestBody:
+        $ref: "#/components/requestBodies/Login"
+      responses:
+        '200':
+          description: User login successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: JWT Token
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTE1ODY4NjYsImlkIjoiNGJlMjMwNDYtMWI2Zi00NzAzLWJmMzYtZDIyYzA2YTI5NGI3IiwibmFtZSI6ImRlbW8xMjEifQ.BWwDzbEkumXppeCpS-HxxIfmdbRvfYLrCSbIx-hbYTI"
+        "401":
+          $ref: "#/components/responses/Standard401ErrorResponse"
+        "4XX":
+          $ref: "#/components/responses/Standard4XXErrorResponse"
 
 
