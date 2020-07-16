@@ -15,6 +15,14 @@ servers:
     description: Live Server
 
 components:
+  requestBodies:
+    content:
+      application/json:
+        schema:
+          $ref: ../schemas/Login.yml
+    description: Login
+    required: true
+
   responses:
     Standard401ErrorResponse:
       description: Unauthorized
@@ -47,6 +55,15 @@ components:
         code: 40083
         message: 参数错误
 
+    type: object
+    properties:
+      username:
+        description: Username
+        type: string
+      password:
+        description: Password
+        type: string
+
   securitySchemes:
     bearerAuth:
       type: http
@@ -71,5 +88,26 @@ paths:
         "4XX":
           $ref: "#/components/responses/Standard4XXErrorResponse"
 
+  /login:
+    post:
+      security:
+      - bearerAuth: []
+    tags:
+      - Base
+    summary: User Login
+    description: User Login API
+    requestBody:
+      $ref: ../components/requestBodies/Login.yml
+    responses:
+      '200':
+        description: A list of Customers was retrieved successfully
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: ../components/schemas/Customer.yaml
+      '401':
+        $ref: ../components/responses/AccessForbidden.yaml
 
 
