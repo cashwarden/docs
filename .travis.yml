@@ -3,7 +3,14 @@ go:
   - 1.14.3
 
 git:
-  depth: false
+  depth: 1
+
+branches:
+  only:
+    - master
+
+before_script:
+  - rm -rf public
 
 script:
   - go get gopkg.in/yaml.v2
