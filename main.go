@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path"
 	"path/filepath"
 	"strings"
 
@@ -14,32 +15,38 @@ import (
 )
 
 const rootPath = "openapi/"
-const ymlFile = "public/openapi.yml"
-const jsonFile = "public/openapi.json"
-const indexFile = "public/index.html"
+const indexPath = "public/"
+const ymlFile = "openapi.yml"
+const jsonFile = "openapi.json"
+const indexFile = "index.html"
 
 func main() {
-	clear()
-	createFile(ymlFile)
-	writeFile(fmt.Sprintf("%sbasic.yml", rootPath), ymlFile)
-	walkMatch(rootPath, "*.yml")
+	clearDir(getWdFile(""))
+	initFile()
+	writeFile(fmt.Sprintf("%sbasic.yml", rootPath), getWdFile(ymlFile))
+	walkMatch(rootPath, "*.yml", getWdFile(ymlFile))
 
-	yamlToJson(ymlFile, jsonFile)
-	makeHTML(indexFile, jsonFile)
+	yamlToJson(getWdFile(ymlFile), getWdFile(jsonFile))
+	makeHTML(getWdFile(indexFile), getWdFile(jsonFile))
 }
 
-func clear() {
-	os.Remove(ymlFile)
-	os.Remove(jsonFile)
-	os.Remove(indexFile)
+func clearDir(dir string) error {
+	names, err := ioutil.ReadDir(dir)
+	if err != nil {
+		return err
+	}
+	for _, entery := range names {
+		os.RemoveAll(path.Join([]string{dir, entery.Name()}...))
+	}
+	return nil
 }
 
-func walkMatch(root, pattern string) error {
+func walkMatch(root, pattern, ymlFile string) error {
 	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
-		if path != fmt.Sprintf("%sbasic.yml", rootPath) {
+		if path != fmt.Sprintf("%sbasic.yml", root) {
 			if info.IsDir() && info.Name() != root {
 				if str := strings.Replace(info.Name(), strings.TrimRight(root, "/"), "", 1); str != "" {
 					s := fmt.Sprintf("%s:\n", getSpace(path)+str)
@@ -62,16 +69,25 @@ func walkMatch(root, pattern string) error {
 	return nil
 }
 
-func createFile(path string) {
-	var _, err = os.Stat(path)
-
+func initFile() {
+	_, err := os.Stat(indexPath)
 	if os.IsNotExist(err) {
-		var file, err = os.Create(path)
-		if err != nil {
-			log.Println(err)
+		errDir := os.MkdirAll(indexPath, 0755)
+		if errDir != nil {
+			log.Fatal(err)
 		}
-		defer file.Close()
 	}
+	file, err := os.OpenFile(getWdFile(ymlFile), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Println(err)
+	}
+	defer file.Close()
+}
+
+// 获取文件的绝对路径
+func getWdFile(filename string) string {
+	wd, _ := os.Getwd()
+	return fmt.Sprintf("%s/%s%s", wd, indexPath, filename)
 }
 
 func readFile(file string) []byte {
