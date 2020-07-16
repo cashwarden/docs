@@ -22,6 +22,7 @@ jobs:
 
       - run: |
           mkdir public
+          chmod +x docs-cli-linux-amd64
           ./docs-cli-linux-amd64
           # go run main.go
 
