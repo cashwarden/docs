@@ -31,4 +31,4 @@ deploy:
     branch: master # 博客源码的分支
 
 notifications:
-  slack: $SLACK_TOKEN
+  slack: ${SLACK_TOKEN}#docs
