@@ -1,0 +1,52 @@
+Ledger:
+  type: object
+  properties:
+    id:
+      description: Ledger id
+      type: integer
+      example: 23
+    name:
+      description: Ledger name
+      type: string
+      example: "cashwarden"
+    type:
+      $ref: "#/components/schemas/LedgerType"
+    type_name:
+      description: 账本类型名称
+      type: string
+      example: "普通账本"
+    cover:
+      description: Ledger cover
+      type: string
+      example: ""
+    remark:
+      description: Ledger remark
+      type: string
+      example: ""
+    default:
+      $ref: "#/components/schemas/Bool"
+    creator:
+      $ref: "#/components/schemas/Bool"
+    hash_id:
+      description: ledger  hash ID
+      type: string
+      example: "GKN721E9Z1Y6XD6L8QV4"
+    
+
+LedgerType:
+  type: string
+  description: >
+    账本类型
+
+    * general_ledger 普通账本
+
+    * share_ledger 共享账本
+
+    * AA_ledger AA 账本
+
+  enum:
+  - general_ledger
+  - share_ledger
+  - AA_ledger
+  example: general_ledger
+  default: general_ledger

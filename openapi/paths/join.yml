@@ -1,4 +1,4 @@
-/login:
+/join:
   post:
     security:
     - bearerAuth: []

@@ -1,0 +1,36 @@
+User:
+  type: object
+  properties:
+    username:
+      description: Username
+      type: string
+      example: "cashwarden"
+    avatar:
+      description: User Avatar
+      type: string
+      example: "https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=48"
+    email:
+      description: User Email
+      type: string
+      example: "example@gmail.com"
+    status:
+      $ref: "#/components/schemas/UserStatus"
+    base_currency_code:
+      description: User Base Currency Code
+      type: string
+      example: "CNY"
+
+UserStatus:
+  type: string
+  description: >
+    状态
+
+    * unactivated 未激活
+
+    * active 激活
+
+  enum:
+  - unactivated
+  - active
+  example: unactivated
+  default: unactivated

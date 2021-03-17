@@ -1,0 +1,14 @@
+CreatedAt:
+  type: string
+  description: 记录创建时间
+  example: "2018-08-12T15:19:21+08:00"
+
+UpdatedAt:
+  type: string
+  description: 记录最后更新时间
+  example: "2018-08-12T15:19:21+08:00"
+  
+Bool:
+  type: bool
+  description:  布尔类型
+  example: true

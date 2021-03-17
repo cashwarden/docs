@@ -1,0 +1,5 @@
+User:
+  token:
+    type: string
+    description: JWT Token
+    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTE1ODY4NjYsImlkIjoiNGJlMjMwNDYtMWI2Zi00NzAzLWJmMzYtZDIyYzA2YTI5NGI3IiwibmFtZSI6ImRlbW8xMjEifQ.BWwDzbEkumXppeCpS-HxxIfmdbRvfYLrCSbIx-hbYTI"
