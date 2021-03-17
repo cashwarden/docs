@@ -112,6 +112,11 @@ components:
           example: "GKN721E9Z1Y6XD6L8QV4"
         
     
+    LedgerArray:
+      type: array
+      items:
+        $ref: "#/components/schemas/Ledger"
+    
     LedgerType:
       type: string
       description: >
@@ -206,28 +211,35 @@ paths:
         "4XX":
           $ref: "#/components/responses/Standard4XXErrorResponse"
 
-  /join:
-    post:
+  /ledgers:
+    get:
       security:
       - bearerAuth: []
       tags:
-        - Base
-      summary: User login
-      description: User login API
-      requestBody:
-        $ref: "#/components/requestBodies/Login"
+        - Ledger
+      summary: Get User Ledger List
       responses:
         '200':
-          description: User login successfully
+          description: API responses successfully
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  token:
+                  request_id:
                     type: string
-                    description: JWT Token
-                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTE1ODY4NjYsImlkIjoiNGJlMjMwNDYtMWI2Zi00NzAzLWJmMzYtZDIyYzA2YTI5NGI3IiwibmFtZSI6ImRlbW8xMjEifQ.BWwDzbEkumXppeCpS-HxxIfmdbRvfYLrCSbIx-hbYTI"
+                    example: "f21626edd0f5790709c8-0000"
+                  code:
+                    type: integer
+                    example: 0
+                  message:
+                    type: string
+                    example: 成功
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        $ref: "#/components/schemas/LedgerArray" 
         "401":
           $ref: "#/components/responses/Standard401ErrorResponse"
         "4XX":
@@ -251,14 +263,26 @@ paths:
               schema:
                 type: object
                 properties:
-                  user:
-                    $ref: "#/components/schemas/User" 
-                  token:
+                  request_id:
                     type: string
-                    description: JWT Token
-                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTE1ODY4NjYsImlkIjoiNGJlMjMwNDYtMWI2Zi00NzAzLWJmMzYtZDIyYzA2YTI5NGI3IiwibmFtZSI6ImRlbW8xMjEifQ.BWwDzbEkumXppeCpS-HxxIfmdbRvfYLrCSbIx-hbYTI"
-                  default_ledger:
-                    $ref: "#/components/schemas/Ledger"   
+                    example: "f21626edd0f5790709c8-0000"
+                  code:
+                    type: integer
+                    example: 0
+                  message:
+                    type: string
+                    example: 成功
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        $ref: "#/components/schemas/User" 
+                      token:
+                        type: string
+                        description: JWT Token
+                        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTE1ODY4NjYsImlkIjoiNGJlMjMwNDYtMWI2Zi00NzAzLWJmMzYtZDIyYzA2YTI5NGI3IiwibmFtZSI6ImRlbW8xMjEifQ.BWwDzbEkumXppeCpS-HxxIfmdbRvfYLrCSbIx-hbYTI"
+                      default_ledger:
+                        $ref: "#/components/schemas/Ledger"   
         "401":
           $ref: "#/components/responses/Standard401ErrorResponse"
         "4XX":
