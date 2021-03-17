@@ -39,7 +39,28 @@ components:
           schema:
             $ref: "#/components/schemas/Error"
 
+    User:
+      token:
+        type: string
+        description: JWT Token
+        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTE1ODY4NjYsImlkIjoiNGJlMjMwNDYtMWI2Zi00NzAzLWJmMzYtZDIyYzA2YTI5NGI3IiwibmFtZSI6ImRlbW8xMjEifQ.BWwDzbEkumXppeCpS-HxxIfmdbRvfYLrCSbIx-hbYTI"
+
   schemas:
+    CreatedAt:
+      type: string
+      description: 记录创建时间
+      example: "2018-08-12T15:19:21+08:00"
+    
+    UpdatedAt:
+      type: string
+      description: 记录最后更新时间
+      example: "2018-08-12T15:19:21+08:00"
+      
+    Bool:
+      type: bool
+      description:  布尔类型
+      example: true
+
     Error:
       type: object
       properties:
@@ -56,6 +77,59 @@ components:
         code: 40083
         message: 参数错误
 
+    Ledger:
+      type: object
+      properties:
+        id:
+          description: Ledger id
+          type: integer
+          example: 23
+        name:
+          description: Ledger name
+          type: string
+          example: "cashwarden"
+        type:
+          $ref: "#/components/schemas/LedgerType"
+        type_name:
+          description: 账本类型名称
+          type: string
+          example: "普通账本"
+        cover:
+          description: Ledger cover
+          type: string
+          example: ""
+        remark:
+          description: Ledger remark
+          type: string
+          example: ""
+        default:
+          $ref: "#/components/schemas/Bool"
+        creator:
+          $ref: "#/components/schemas/Bool"
+        hash_id:
+          description: ledger  hash ID
+          type: string
+          example: "GKN721E9Z1Y6XD6L8QV4"
+        
+    
+    LedgerType:
+      type: string
+      description: >
+        账本类型
+    
+        * general_ledger 普通账本
+    
+        * share_ledger 共享账本
+    
+        * AA_ledger AA 账本
+    
+      enum:
+      - general_ledger
+      - share_ledger
+      - AA_ledger
+      example: general_ledger
+      default: general_ledger
+
     Login:
       type: object
       properties:
@@ -70,6 +144,43 @@ components:
       required:
         - username
         - password
+
+    User:
+      type: object
+      properties:
+        username:
+          description: Username
+          type: string
+          example: "cashwarden"
+        avatar:
+          description: User Avatar
+          type: string
+          example: "https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=48"
+        email:
+          description: User Email
+          type: string
+          example: "example@gmail.com"
+        status:
+          $ref: "#/components/schemas/UserStatus"
+        base_currency_code:
+          description: User Base Currency Code
+          type: string
+          example: "CNY"
+    
+    UserStatus:
+      type: string
+      description: >
+        状态
+    
+        * unactivated 未激活
+    
+        * active 激活
+    
+      enum:
+      - unactivated
+      - active
+      example: unactivated
+      default: unactivated
 
   securitySchemes:
     bearerAuth:
@@ -95,7 +206,7 @@ paths:
         "4XX":
           $ref: "#/components/responses/Standard4XXErrorResponse"
 
-  /login:
+  /join:
     post:
       security:
       - bearerAuth: []
@@ -122,4 +233,34 @@ paths:
         "4XX":
           $ref: "#/components/responses/Standard4XXErrorResponse"
 
+  /login:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+        - Base
+      summary: User login
+      description: User login API
+      requestBody:
+        $ref: "#/components/requestBodies/Login"
+      responses:
+        '200':
+          description: User login successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: "#/components/schemas/User" 
+                  token:
+                    type: string
+                    description: JWT Token
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTE1ODY4NjYsImlkIjoiNGJlMjMwNDYtMWI2Zi00NzAzLWJmMzYtZDIyYzA2YTI5NGI3IiwibmFtZSI6ImRlbW8xMjEifQ.BWwDzbEkumXppeCpS-HxxIfmdbRvfYLrCSbIx-hbYTI"
+                  default_ledger:
+                    $ref: "#/components/schemas/Ledger"   
+        "401":
+          $ref: "#/components/responses/Standard401ErrorResponse"
+        "4XX":
+          $ref: "#/components/responses/Standard4XXErrorResponse"
 
