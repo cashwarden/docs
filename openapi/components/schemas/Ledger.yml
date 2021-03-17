@@ -33,6 +33,11 @@ Ledger:
       example: "GKN721E9Z1Y6XD6L8QV4"
     
 
+LedgerArray:
+  type: array
+  items:
+    $ref: "#/components/schemas/Ledger"
+
 LedgerType:
   type: string
   description: >
