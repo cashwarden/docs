@@ -212,7 +212,7 @@ components:
           type: string
           example: "吃糖"
         date:
-          description: 时间
+          description: 时间，格式必须为「Y-m-d H:i」
           type: string
           example: "2020-08-31 10:12"
         exclude_from_stats:
