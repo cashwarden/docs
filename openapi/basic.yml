@@ -11,5 +11,7 @@ info:
   description: The Cashwarden APIs.
   version: 1.0.0
 servers:
-  - url: https://api.cashwarden.com
+  - url: https://api.cashwarden.com/v1
     description: Live Server
+  - url: https://api.cashwarden.com
+    description: Only for health check

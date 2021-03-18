@@ -1,0 +1,7 @@
+Transaction:
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/Transaction"
+  description: Login
+  required: true

@@ -1,0 +1,155 @@
+Transaction:
+  type: object
+  properties:
+    ledger_id:
+      $ref: "#/components/schemas/LedgerId"
+    type:
+      $ref: "#/components/schemas/TransactionType"
+    from_account_id:
+      description: 支付账户, 支出和交易类型必填
+      type: integer
+      example: 12
+    to_account_id:
+      description: 收款帐户，收入和交易类型必填
+      type: integer
+      example: 34
+    currency_amount:
+      description: 金额
+      type: number
+      format: double
+      example: 34.23
+    currency_code:
+      $ref: "#/components/schemas/CurrencyCode"
+    category_id:
+      description: 分类 ID
+      type: integer
+      example: 12
+    tags:
+      description: 标签
+      type: array
+      items:
+        type: string
+        example: "测试"
+    remark:
+      description: 备注
+      type: string
+      example: "吃糖"
+    date:
+      description: 时间
+      type: string
+      example: "2020-08-31 10:12"
+    exclude_from_stats:
+      description: 不计入统计
+      type: bool
+      example: false
+      default: false
+    reimbursement_status:
+      $ref: "#/components/schemas/ReimbursementStatus"
+  required:
+    - ledger_id
+    - type
+    - category_id
+    - currency_amount
+    - currency_code
+
+TransactionResponse:
+  type: object
+  properties:
+    id:
+      $ref: "#/components/schemas/ID"
+    amount:
+      description: 换算为基础货币的金额
+      type: number
+      format: double
+      example: 34.23
+    ledger_id:
+      $ref: "#/components/schemas/LedgerId"
+    type:
+      $ref: "#/components/schemas/TransactionType"
+    type_name:
+      description: 类型名称
+      type: string
+      example: "支出"
+    from_account_id:
+      description: 支付账户, 支出和交易类型必填
+      type: integer
+      example: 12
+    to_account_id:
+      description: 收款帐户，收入和交易类型必填
+      type: integer
+      example: 34
+    currency_amount:
+      description: 金额
+      type: number
+      format: double
+      example: 34.23
+    currency_code:
+      $ref: "#/components/schemas/CurrencyCode"
+    category_id:
+      description: 分类 ID
+      type: integer
+      example: 12
+    tags:
+      description: 标签
+      type: array
+      items:
+        type: string
+        example: "测试"
+    description:
+      description: 描述
+      type: string
+      example: ""
+    remark:
+      description: 备注
+      type: string
+      example: "吃糖"
+    date:
+      description: 时间
+      type: string
+      example: "2020-08-31 10:12"
+    exclude_from_stats:
+      description: 不计入统计
+      type: bool
+      example: false
+      default: false
+    reimbursement_status:
+      $ref: "#/components/schemas/ReimbursementStatus"
+    created_at:
+      $ref: "#/components/schemas/CreatedAt"
+    updated_at:
+      $ref: "#/components/schemas/UpdatedAt"
+
+TransactionType:
+  type: string
+  description: >
+    交易类型
+
+    * expense 支出
+
+    * income 收入
+
+    * transfer 交易
+
+  enum:
+  - expense
+  - income
+  - transfer
+  example: expense
+
+
+ReimbursementStatus:
+  type: string
+  description: >
+    报销状态
+
+    * none 不需要
+
+    * todo 待报销
+
+    * done 已报销
+
+  enum:
+  - none
+  - todo
+  - done
+  example: none  

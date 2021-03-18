@@ -12,3 +12,18 @@ Bool:
   type: bool
   description:  布尔类型
   example: true
+
+CurrencyCode:
+  description: 货币代码
+  type: string
+  example: "CNY"
+
+LedgerId:
+  description: 账本 ID
+  type: integer
+  example: 34
+
+ID:
+  description: ID
+  type: integer
+  example: 3

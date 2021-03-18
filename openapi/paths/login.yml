@@ -1,11 +1,8 @@
 /login:
   post:
-    security:
-    - bearerAuth: []
     tags:
       - Base
-    summary: User login
-    description: User login API
+    summary: 用户登录
     requestBody:
       $ref: "#/components/requestBodies/Login"
     responses:

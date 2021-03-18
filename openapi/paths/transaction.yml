@@ -1,0 +1,32 @@
+/transaction:
+  post:
+    security:
+    - bearerAuth: []
+    tags:
+      - Transaction
+    summary: 经典记账
+    requestBody:
+      $ref: "#/components/requestBodies/Transaction"
+    responses:
+      '200':
+        description: User Create Transaction successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                request_id:
+                  type: string
+                  example: "f21626edd0f5790709c8-0000"
+                code:
+                  type: integer
+                  example: 0
+                message:
+                  type: string
+                  example: 成功
+                data:
+                  $ref: "#/components/schemas/TransactionResponse" 
+      "401":
+        $ref: "#/components/responses/Standard401ErrorResponse"
+      "4XX":
+        $ref: "#/components/responses/Standard4XXErrorResponse"
